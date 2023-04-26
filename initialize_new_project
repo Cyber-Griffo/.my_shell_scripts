@@ -7,6 +7,8 @@
 #                 "opt1" "opt2" ...
 #   Return value: selected index (0 for opt1, 1 for opt2 ...)
 
+PATH=$PATH:$(dirname $0)/helper_scripts
+
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/setup_scripts"
 
 clear
