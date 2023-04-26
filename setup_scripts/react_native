@@ -8,7 +8,6 @@
 #   Return value: selected index (0 for opt1, 1 for opt2 ...)
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 
-projectname=$1
 projecttype=$0
 
 function select_option {
@@ -77,6 +76,11 @@ function select_option {
 
     return $selected
 }
+
+read -p "Enter your desired projectname (leave empty for the default): " projectname
+if [ -z "$projectname" ]; then
+    projectname="my-app"
+fi
 
 echo "Select the type of your ${projecttype#./} project $projectname with up/down keys and enter to confirm:"
 echo

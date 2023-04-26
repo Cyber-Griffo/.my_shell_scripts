@@ -88,24 +88,11 @@ function find_executable_files {
         fi
     done < <(find . -maxdepth 1 -type f -print0)
 
-    echo "${files[*]}"
-}
+    # sort the array
+    sorted_files=($(printf "%s\n" "${files[@]}" | sort))
 
-function color_files {
-    local files=("$@")
-    local colored_files=()
-
-    local colors=($(tput colors))
-    local i=1
-    for file in "${files[@]}"; do
-        file=${file// /_}
-        color=$(tput setaf $i)
-        plain_file=${file//_/ }
-        colored_files+=("${color}${file}${color_reset}")
-        ((i++))
-    done
-
-    echo "${colored_files[*]}"
+    # echo the sorted array
+    printf "%s\n" "${sorted_files[@]}"
 }
 
 cd "$DIR/setup_scripts"
@@ -113,7 +100,7 @@ cd "$DIR/setup_scripts"
 clear
 
 plain_options=($(find_executable_files))
-draw_options=($(color_files "${plain_options[@]}"))
+draw_options=($(generate_colored_text "${plain_options[@]}"))
 
 echo "Select what kind of project you want to initialize using up/down keys and enter to confirm:"
 echo
@@ -122,9 +109,4 @@ select_option "${draw_options[@]}"
 choice1=$?
 clear
 
-read -p "Enter your desired projectname (leave empty for the default): " projectname
-if [ -z "$projectname" ]; then
-    projectname="my-app"
-fi
-
-./${plain_options[$choice1]} $projectname
+./${plain_options[$choice1]}
