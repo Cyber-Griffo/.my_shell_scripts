@@ -1,14 +1,17 @@
 #!/bin/bash
 
-# Add helper_scripts directory to PATH
-currentDirectory="$(pwd)"
-PATH=$PATH:$(dirname $0)/helper_scripts
+currentDirectory="$1"
 
-# Get the absolute path of the project_types directory
-DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/project_types"
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+projecttype=$(basename $0)
+DIR=$DIR/../"${projecttype// /_}_setup_scripts"
+set keyseq-timeout 0
 
-# Clear the screen
-clear
+# read -e -p "Enter your desired projectname (leave empty for the default): " projectname
+
+if [ -z "$projectname" ]; then
+    projectname="my-app"
+fi
 
 # Find all executable files in the project_types directory and sort them alphabetically
 sortedfiles=($(find_executable_files_in_dir $DIR))
@@ -20,7 +23,7 @@ underscorefiles=($(generate_underscored_text "${sortedfiles[@]}"))
 echo "Select what kind of project you want to initialize using up/down keys and enter to confirm:"
 echo
 source draw_arrow_select_menu "${underscorefiles[@]}"
-choice=$SELECTED
+choice=$selected
 clear
 
 # Generate spaced text for the selected filename and execute it

@@ -1,0 +1,14 @@
+- react
+  - vite
+    - folderstructure
+    - no folderstructure
+  - CRA
+    - typescript
+      - folderstructure
+      - no folderstructure
+    - javascript
+      - folderstructure
+      - no folderstructure
+  - NextJs
+    - folderstructure
+    - no folderstructure

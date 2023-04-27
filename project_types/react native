@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 # Renders a text based list of options that can be selected by the
 # user using up, down and enter keys and returns the chosen option.
@@ -10,7 +10,6 @@ DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 
 projecttype=$(basename $0)
 
-read -p "Enter your desired projectname (leave empty for the default): " projectname
 if [ -z "$projectname" ]; then
     projectname="my-app"
 fi

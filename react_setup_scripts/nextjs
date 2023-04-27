@@ -1,0 +1,15 @@
+#!/bin/bash
+
+npx create-next-app
+wait
+
+clear
+
+read -e -p "Do you want to add custom folderstructure? (y/n): " addfolderstructure
+read -e -p "Do you want to add custom eslint rules? (y/n): " addeslint
+read -e -p "Do you want to add custom prettier rules? (y/n): " addprettier
+read -e -p "Do you want to add testing? (y/n): " addtesting
+
+newest_dir=$(ls -td -- */ | head -n 1)
+
+eval $(cd "$newest_dir")
