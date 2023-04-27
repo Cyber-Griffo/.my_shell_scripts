@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if [ -z "$*" ]; then
+  echo "No parameters provided."
+else
+  underscored_files=()
+  for file in "$@"; do
+    file="${file//:/_}"
+    underscored_files+=("$file")
+  done
+
+  printf '%s\n' "${underscored_files[@]}"
+fi

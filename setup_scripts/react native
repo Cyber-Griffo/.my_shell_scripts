@@ -82,7 +82,7 @@ if [ -z "$projectname" ]; then
     projectname="my-app"
 fi
 
-echo "Select the type of your ${projecttype#./} project $projectname with up/down keys and enter to confirm:"
+echo "Select up/down keys and enter to confirm:"
 echo
 
 cd "$DIR"

@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [ -z "$*" ]; then
+  echo "No parameters provided."
+else
+  file=${1//:/ }
+
+  printf "$file"
+fi
