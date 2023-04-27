@@ -1,23 +1,27 @@
 #!/usr/bin/env bash
 
+# Add helper_scripts directory to PATH
 PATH=$PATH:$(dirname $0)/helper_scripts
 
+# Get the absolute path of the setup_scripts directory
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/setup_scripts"
 
+# Clear the screen
 clear
 
+# Find all executable files in the setup_scripts directory and sort them alphabetically
 sortedfiles=($(find_executable_files_in_dir $DIR))
 
+# Generate underscored text for the filenames in sortedfiles
 underscorefiles=($(generate_underscored_text "${sortedfiles[@]}"))
 
+# Display a menu of the underscored filenames and allow the user to select one
 echo "Select what kind of project you want to initialize using up/down keys and enter to confirm:"
 echo
-
 source draw_arrow_select_menu "${underscorefiles[@]}"
 choice=$SELECTED
 clear
 
+# Generate spaced text for the selected filename and execute it
 chosenfile="$(generate_spaced_text "${sortedfiles[$choice]}")"
-
-echo $chosenfile
 $DIR/"$chosenfile"
