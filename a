@@ -1,40 +1,8 @@
 #!/bin/bash
 
-currDir=$(pwd)
-
-helperDir="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/../helper_scripts"
-
-cd $helperDir
-
-source colors
-# Source the utils.sh file
+pname=$(pwd)
+cd "C:/Users/chris/.my_shell_scripts/helper_scripts"
 source utils.sh
-
-cd $currDir
-
-pname="my_next_app"
-
-if [ -e "$pname" ]; then
-  i=1
-  while [ -e "${pname}_$i" ]; do
-    i=$((i + 1))
-  done
-  pname="${pname}_$i"
-fi
-
-read -e -p "$(echo -e "Enter your desired ${BYellow}projectname${Color_Off} (default: ${Cyan}$pname${Color_Off}): ")" user_pname
-echo -e "${UPurple}loading...${Color_Off}"
-
-if
-  [ -n "$user_pname" ]
-then
-  pname="$user_pname"
-fi
-
-npx create-next-app "$pname"
-wait
-
-clear
 
 yninput "Do you want to ${BYellow}add custom folderstructure?${Color_Off} (${Cyan}Y/n${Color_Off}): " addfolderstructure
 
@@ -51,29 +19,28 @@ cd $pname
 
 custom_folders=("constants" "helpers" "hooks" "styles" "utils")
 comp_folders=("atoms" "molecules" "organisms" "templates" "pages")
-keep_file=".gitkeep"
 
 if [ $addfolderstructure = true ]; then
-  fodlerstructureancor="."
-  if [ -d "$fodlerstructureancor/src" ]; then
-    fodlerstructureancor="$fodlerstructureancor/src"
+  fodlerstructureancor="$pname"
+  if [ -d "$pname/src" ]; then
+    fodlerstructureancor="$pname/src"
     echo "Adding folders & .gitkeep files to the projects src folder ${fodlerstructureancor}..."
     for folder in "${custom_folders[@]}"; do
       mkdir -p "$fodlerstructureancor/$folder"
-      touch "$fodlerstructureancor/$folder/$keep_file"
+      touch "$fodlerstructureancor/$folder/.gitignore"
     done
   else
     echo "Adding folders & .gitkeep files to the projects root folder ${fodlerstructureancor}..."
     for folder in "${custom_folders[@]}"; do
       mkdir -p "$fodlerstructureancor/$folder"
-      touch "$fodlerstructureancor/$folder/$keep_file"
+      touch "$fodlerstructureancor/$folder/.gitignore"
     done
   fi
   if [ $addatomiccomponentdesign = true ]; then
     echo "Adding folders & .gitkeep files to the projects components folder ${fodlerstructureancor}/components..."
     for folder in "${comp_folders[@]}"; do
       mkdir -p "$fodlerstructureancor/components/$folder"
-      touch "$fodlerstructureancor/components/$folder/$keep_file"
+      touch "$fodlerstructureancor/components/$folder/.gitignore"
     done
   fi
 fi

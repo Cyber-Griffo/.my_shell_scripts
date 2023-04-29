@@ -29,3 +29,4 @@ clear
 # Generate spaced text for the selected filename and execute it
 chosenfile="$(generate_spaced_text "${sortedfiles[$choice]}")"
 $DIR/"$chosenfile" $currentDirectory
+wait

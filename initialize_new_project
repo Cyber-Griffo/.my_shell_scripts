@@ -5,7 +5,8 @@ currentDirectory="$(pwd)"
 PATH=$PATH:$(dirname $0)/helper_scripts
 
 # Get the absolute path of the project_types directory
-DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/project_types"
+TOPDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+DIR="${TOPDIR}/project_types"
 
 # Clear the screen
 clear
