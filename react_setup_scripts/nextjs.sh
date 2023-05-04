@@ -6,7 +6,7 @@ helperDir="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/../help
 
 cd $helperDir
 
-source colors
+source colors.sh
 # Source the utils.sh file
 source utils.sh
 
@@ -75,5 +75,8 @@ if [ $addfolderstructure = true ]; then
       mkdir -p "$fodlerstructureancor/components/$folder"
       touch "$fodlerstructureancor/components/$folder/$keep_file"
     done
+  else
+    mkdir -p "$fodlerstructureancor/components"
+    touch "$fodlerstructureancor/components/$keep_file"
   fi
 fi

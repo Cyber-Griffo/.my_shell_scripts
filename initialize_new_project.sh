@@ -12,18 +12,18 @@ DIR="${TOPDIR}/project_types"
 clear
 
 # Find all executable files in the project_types directory and sort them alphabetically
-sortedfiles=($(find_executable_files_in_dir $DIR))
+sortedfiles=($(find_executable_files_in_dir.sh $DIR))
 
 # Generate underscored text for the filenames in sortedfiles
-underscorefiles=($(generate_underscored_text "${sortedfiles[@]}"))
+underscorefiles=($(generate_disyplay_text.sh "${sortedfiles[@]}"))
 
 # Display a menu of the underscored filenames and allow the user to select one
 echo "Select what kind of project you want to initialize using up/down keys and enter to confirm:"
 echo
-source draw_arrow_select_menu "${underscorefiles[@]}"
+source draw_arrow_select_menu.sh "${underscorefiles[@]}"
 choice=$SELECTED
 clear
 
 # Generate spaced text for the selected filename and execute it
-chosenfile="$(generate_spaced_text "${sortedfiles[$choice]}")"
+chosenfile="$(generate_spaced_text.sh "${sortedfiles[$choice]}")"
 $DIR/"$chosenfile" $currentDirectory

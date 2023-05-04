@@ -10,6 +10,7 @@ else
   for file in "$@"; do
     # Replace all occurrences of ":" with "_"
     file="${file//:/_}"
+    file="${file//.sh/}"
     underscored_files+=("$file")
   done
 
